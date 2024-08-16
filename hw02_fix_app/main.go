@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	var path string = "data.json"
+	path := "data.json"
 
 	fmt.Printf("Enter data file path: ")
 	fmt.Scanln(&path)
@@ -19,7 +19,6 @@ func main() {
 
 	if len(path) == 0 {
 		path = "data.json"
-	} else {
 	}
 
 	staff, err = reader.ReadJSON(path, -1)
