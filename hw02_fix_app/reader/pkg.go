@@ -9,23 +9,23 @@ import (
 	"github.com/fixme_my_friend/hw02_fix_app/types"
 )
 
-func ReadJSON(filePath string, _ int) ([]types.Employee, error) {
+func ReadJSON(filePath string) ([]types.Employee, error) {
 	f, err := os.Open(filePath)
 	if err != nil {
 		fmt.Printf("Error: %v", err)
+	} else {
+		return nil, err
 	}
 
 	bytes, err := io.ReadAll(f)
 	if err != nil {
 		fmt.Printf("Error: %v", err)
-		return nil, nil
+		return nil, err
 	}
 
 	var data []types.Employee
 
 	err = json.Unmarshal(bytes, &data)
 
-	res := data
-
-	return res, err
+	return data, err
 }
