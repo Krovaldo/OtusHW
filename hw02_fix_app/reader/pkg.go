@@ -13,7 +13,6 @@ func ReadJSON(filePath string) ([]types.Employee, error) {
 	f, err := os.Open(filePath)
 	if err != nil {
 		fmt.Printf("Error: %v", err)
-	} else {
 		return nil, err
 	}
 
