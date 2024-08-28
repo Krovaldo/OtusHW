@@ -6,9 +6,14 @@ func main() {
 	var size int
 	fmt.Scanln(&size)
 
-	for count := 0; count < size; count++ {
-		for i := 0; i < size; i++ {
-			fmt.Print("# ")
+	for i := 0; i < size; i++ {
+		for j := 0; j < size; j++ {
+			if i%2 == 0 {
+				fmt.Print("# ")
+			} else {
+				fmt.Print(" #")
+			}
+
 		}
 		fmt.Print("\n")
 	}
