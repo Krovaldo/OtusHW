@@ -40,7 +40,7 @@ type Book struct {
 	rate   float32
 }
 
-func (b *Book) AddNewBook(id int, title, author string, year, size int, rate float32) {
+func (b *Book) SetNewBook(id int, title, author string, year, size int, rate float32) {
 	b.id = id
 	b.title = title
 	b.author = author
@@ -50,18 +50,18 @@ func (b *Book) AddNewBook(id int, title, author string, year, size int, rate flo
 	fmt.Println("New book successfully added")
 }
 
-func (b *Book) GetBook() {
-	fmt.Println("Your book is:", b.id, b.title, b.author, b.year, b.size, b.rate)
+func (b *Book) GetBook() (id int, title, author string, year, size int, rate float32) {
+	return b.id, b.title, b.author, b.year, b.size, b.rate
 }
 
 func main() {
 	new1 := Book{}
-	new1.AddNewBook(50, "HarryPotter", "J. K. Rowling", 2010, 512, 9.2)
-	new1.GetBook()
+	new1.SetNewBook(50, "HarryPotter", "J. K. Rowling", 2010, 512, 9.2)
+	fmt.Println(new1.GetBook())
 
 	new2 := Book{}
-	new2.AddNewBook(51, "The Lord of the Rings", "J. R. R. Tolkien", 2008, 1423, 8.9)
-	new2.GetBook()
+	new2.SetNewBook(51, "The Lord of the Rings", "J. R. R. Tolkien", 2008, 1423, 8.9)
+	fmt.Println(new2.GetBook())
 
 	comp2book := NewComparator(CompareByRate)
 	fmt.Println("Comprasion by year:", comp2book.Comprasion(&new1, &new2))
