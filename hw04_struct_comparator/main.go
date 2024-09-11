@@ -53,7 +53,7 @@ func (b Book) GetBook() (id int, title, author string, year, size int, rate floa
 	return b.id, b.title, b.author, b.year, b.size, b.rate
 }
 
-func (b *Book) SetId(id int) {
+func (b *Book) SetID(id int) {
 	b.id = id
 }
 
@@ -77,7 +77,7 @@ func (b *Book) SetRate(rate float32) {
 	b.rate = rate
 }
 
-func (b Book) GetId() (id int) {
+func (b Book) GetID() (id int) {
 	return b.id
 }
 
