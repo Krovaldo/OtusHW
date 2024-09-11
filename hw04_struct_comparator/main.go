@@ -47,17 +47,64 @@ func (b *Book) SetNewBook(id int, title, author string, year, size int, rate flo
 	b.year = year
 	b.size = size
 	b.rate = rate
-	fmt.Println("New book successfully added")
 }
 
-func (b *Book) GetBook() (id int, title, author string, year, size int, rate float32) {
+func (b Book) GetBook() (id int, title, author string, year, size int, rate float32) {
 	return b.id, b.title, b.author, b.year, b.size, b.rate
+}
+
+func (b *Book) SetId(id int) {
+	b.id = id
+}
+
+func (b *Book) SetTitle(title string) {
+	b.title = title
+}
+
+func (b *Book) SetAuthor(author string) {
+	b.author = author
+}
+
+func (b *Book) SetYear(year int) {
+	b.year = year
+}
+
+func (b *Book) SetSize(size int) {
+	b.size = size
+}
+
+func (b *Book) SetRate(rate float32) {
+	b.rate = rate
+}
+
+func (b Book) GetId() (id int) {
+	return b.id
+}
+
+func (b Book) GetTitle() (title string) {
+	return b.title
+}
+
+func (b Book) GetAuthor() (author string) {
+	return b.author
+}
+
+func (b Book) GetYear() (year int) {
+	return b.year
+}
+
+func (b Book) GetSize() (size int) {
+	return b.size
+}
+
+func (b Book) GetRate() (rate float32) {
+	return b.rate
 }
 
 func main() {
 	new1 := Book{}
 	new1.SetNewBook(50, "HarryPotter", "J. K. Rowling", 2010, 512, 9.2)
-	fmt.Println(new1.GetBook())
+	fmt.Println(new1.GetAuthor())
 
 	new2 := Book{}
 	new2.SetNewBook(51, "The Lord of the Rings", "J. R. R. Tolkien", 2008, 1423, 8.9)
