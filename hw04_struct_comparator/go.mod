@@ -1,3 +1,3 @@
 module github.com/Krovaldo/OtusHW/hw04_struct_comparator
 
-go 1.19
+go 1.22

@@ -1,3 +1,3 @@
 module github.com/Krovaldo/OtusHW/hw02_fix_app
 
-go 1.19
+go 1.22
