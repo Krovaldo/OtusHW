@@ -6,7 +6,7 @@ import (
 	"io"
 	"os"
 
-	"github.com/Krovaldo/OtusHW/hw02_fix_app/types"
+	"github.com/Krovaldo/OtusHW/hw06_testing/hw02_fix_app/types"
 )
 
 func ReadJSON(filePath string) ([]types.Employee, error) {

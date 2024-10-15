@@ -1,4 +1,4 @@
-package main
+package chessboard
 
 import (
 	"fmt"
@@ -26,15 +26,4 @@ func CreateGrid(size int) string {
 		f.WriteString("\n")
 	}
 	return f.String()
-}
-
-func main() {
-	var size int
-	fmt.Scanln(&size)
-
-	if err := SizeOfGrid(size); err != nil {
-		fmt.Println(err)
-	}
-
-	fmt.Print(CreateGrid(size))
 }

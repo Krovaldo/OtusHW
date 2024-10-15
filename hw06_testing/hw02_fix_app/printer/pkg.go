@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/Krovaldo/OtusHW/hw02_fix_app/types"
+	"github.com/Krovaldo/OtusHW/hw06_testing/hw02_fix_app/types"
 )
 
 func PrintStaff(staff []types.Employee) string {

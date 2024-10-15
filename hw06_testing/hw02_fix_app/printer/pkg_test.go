@@ -3,7 +3,8 @@ package printer
 import (
 	"testing"
 
-	"github.com/Krovaldo/OtusHW/hw02_fix_app/types"
+	"github.com/Krovaldo/OtusHW/hw06_testing/hw02_fix_app/types"
+
 	"github.com/stretchr/testify/assert"
 )
 
