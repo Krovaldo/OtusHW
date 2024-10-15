@@ -1,4 +1,4 @@
-package printerArea
+package printerarea
 
 import (
 	"bytes"
@@ -51,7 +51,6 @@ func TestPrinter(t *testing.T) {
 			os.Stdout = originalStdout
 
 			assert.Equal(t, buf.String(), tC.expected)
-
 		})
 	}
 }

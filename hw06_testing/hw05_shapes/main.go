@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/Krovaldo/OtusHW/hw06_testing/hw05_shapes/area"
-	printerArea "github.com/Krovaldo/OtusHW/hw06_testing/hw05_shapes/printer"
+	printerarea "github.com/Krovaldo/OtusHW/hw06_testing/hw05_shapes/printer"
 )
 
 func main() {
@@ -11,8 +11,8 @@ func main() {
 	t := &area.Triangle{Base: 8, Height: 5}
 	n := "not a shape"
 
-	printerArea.PrintArea(c)
-	printerArea.PrintArea(r)
-	printerArea.PrintArea(t)
-	printerArea.PrintArea(n)
+	printerarea.PrintArea(c)
+	printerarea.PrintArea(r)
+	printerarea.PrintArea(t)
+	printerarea.PrintArea(n)
 }

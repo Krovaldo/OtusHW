@@ -1,6 +1,6 @@
 module github.com/Krovaldo/OtusHW/hw06_testing
 
-go 1.22.7
+go 1.22
 
 require (
 	github.com/Krovaldo/OtusHW/hw02_fix_app v0.0.0-20240918164848-a08b5979065f
