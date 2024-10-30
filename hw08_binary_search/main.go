@@ -2,15 +2,9 @@ package main
 
 import (
 	"fmt"
-	"sort"
 )
 
 func BinarySearch(arr []int, num int) int {
-	// Сортируем массив
-	sort.Slice(arr, func(i, j int) bool {
-		return arr[i] < arr[j]
-	})
-
 	left := 0
 	right := len(arr) - 1
 
@@ -30,7 +24,7 @@ func BinarySearch(arr []int, num int) int {
 }
 
 func main() {
-	arr := []int{1, 19, 8, 100, 9, 12, 15}
-	fmt.Println(BinarySearch(arr, 8))
+	arr := []int{1, 5, 8, 11, 12, 15}
+	fmt.Println(BinarySearch(arr, 11))
 	fmt.Println(arr)
 }

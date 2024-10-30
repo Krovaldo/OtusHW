@@ -1,4 +1,4 @@
-module github.com/Krovaldo/hw08_binary_search
+module github.com/Krovaldo/OtusHW/hw08_binary_search
 
 go 1.22
 

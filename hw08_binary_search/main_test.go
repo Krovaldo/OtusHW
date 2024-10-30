@@ -32,10 +32,10 @@ func TestBinarySearch(t *testing.T) {
 			expected: 4,
 		},
 		{
-			name:     "Неотсортированный массив",
-			arr:      []int{19, 23, 5, 18, 7},
-			num:      5,
-			expected: 0,
+			name:     "Middle = num",
+			arr:      []int{1, 1, 1, 1, 1},
+			num:      1,
+			expected: 2,
 		},
 	}
 	for _, tC := range testCases {
