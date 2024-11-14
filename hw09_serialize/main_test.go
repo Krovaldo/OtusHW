@@ -3,7 +3,7 @@ package main
 import (
 	"testing"
 
-	"github.com/fixme_my_friend/hw09_serialize/pb"
+	"github.com/Krovaldo/OtusHW/hw09_serialize/pb"
 	"github.com/stretchr/testify/assert"
 )
 
