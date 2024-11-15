@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package book;
+
+option go_package = "/pb";
+
+message Book {
+    int64 id = 1;
+    string title = 2;
+    string author = 3;
+    int32 year = 4;
+    int64 size = 5;
+    float rate = 6;
+}
+
+message BookList {
+    repeated Book books = 1;
+}
