@@ -7,7 +7,7 @@ import (
 )
 
 func TestReadSensor(t *testing.T) {
-	dataChan := make(chan int)
+	dataChan := make(chan int64)
 	var wg sync.WaitGroup
 
 	wg.Add(1)
@@ -31,12 +31,12 @@ func TestReadSensor(t *testing.T) {
 }
 
 func TestProcessData(t *testing.T) {
-	dataChan := make(chan int, 10)
+	dataChan := make(chan int64, 10)
 	processedDataChan := make(chan float64, 1)
 	var wg sync.WaitGroup
 
 	for i := 0; i < 10; i++ {
-		dataChan <- i
+		dataChan <- int64(i)
 	}
 	close(dataChan)
 

@@ -1,29 +1,32 @@
 package main
 
 import (
+	"crypto/rand"
 	"fmt"
-	"math/rand"
+	"math/big"
 	"sync"
 	"time"
 )
 
-func readSensorData(dataChan chan<- int, wg *sync.WaitGroup) {
+func readSensorData(dataChan chan<- int64, wg *sync.WaitGroup) {
 	defer wg.Done()
 	defer close(dataChan)
 
-	src := rand.NewSource(time.Now().UnixNano())
-	getRand := rand.New(src)
+	getRand, err := rand.Int(rand.Reader, big.NewInt(1000))
+	if err != nil {
+		fmt.Printf("Ошибка при генерации случайного числа: %v", err)
+		return
+	}
 
 	startTime := time.Now()
-
 	for time.Since(startTime) < time.Minute {
-		number := getRand.Intn(1000)
+		number := getRand.Int64()
 		dataChan <- number
 		time.Sleep(70 * time.Millisecond)
 	}
 }
 
-func processData(dataChan <-chan int, calculatedData chan<- float64, wg *sync.WaitGroup) {
+func processData(dataChan <-chan int64, calculatedData chan<- float64, wg *sync.WaitGroup) {
 	defer wg.Done()
 	defer close(calculatedData)
 
@@ -50,12 +53,12 @@ func printCalculatedDate(calculatedData <-chan float64) {
 }
 
 func main() {
-	// генератор рандомных чисел
+	// генератор рандомных чисел math/rand (линтеру не нравится :( )
 	// src := rand.NewSource(time.Now().UnixNano())
 	// getRand := rand.New(src)
 	// fmt.Println(getRand.Intn(10)) // рандомайзер от 0 до 10
 
-	dataChan := make(chan int)
+	dataChan := make(chan int64)
 	calculatedData := make(chan float64)
 
 	var wg sync.WaitGroup
