@@ -8,8 +8,8 @@ import (
 	"time"
 )
 
-func randomNumber(max int) int64 {
-	getRand, err := rand.Int(rand.Reader, big.NewInt(int64(max)))
+func randomNumber(maxNum int) int64 {
+	getRand, err := rand.Int(rand.Reader, big.NewInt(int64(maxNum)))
 	if err != nil {
 		fmt.Printf("Ошибка при генерации случайного числа: %v", err)
 		return 0
