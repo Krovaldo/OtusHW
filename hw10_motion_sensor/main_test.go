@@ -10,23 +10,25 @@ func TestReadSensor(t *testing.T) {
 	dataChan := make(chan int64)
 	var wg sync.WaitGroup
 
-	defer close(dataChan)
-	defer wg.Done()
-
 	wg.Add(1)
 	go readSensorData(dataChan, &wg)
 
 	count := 0
-	timeout := time.After(time.Minute)
+	timeout := time.After(10 * time.Second)
 
 	for {
 		select {
-		case <-dataChan:
+		case _, ok := <-dataChan:
+			if !ok {
+				if count == 0 {
+					t.Error("Данные не были считаны")
+				}
+				return
+			}
 			count++
 		case <-timeout:
-			wg.Wait()
 			if count == 0 {
-				t.Error("Данные не были считаны")
+				t.Error("Данные не были считаны. Timeout")
 			}
 			return
 		}
