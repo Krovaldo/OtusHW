@@ -10,6 +10,9 @@ func TestReadSensor(t *testing.T) {
 	dataChan := make(chan int64)
 	var wg sync.WaitGroup
 
+	defer close(dataChan)
+	defer wg.Done()
+
 	wg.Add(1)
 	go readSensorData(dataChan, &wg)
 
