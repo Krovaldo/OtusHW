@@ -8,20 +8,23 @@ import (
 	"time"
 )
 
+func randomNumber(max int) int64 {
+	getRand, err := rand.Int(rand.Reader, big.NewInt(int64(max)))
+	if err != nil {
+		fmt.Printf("Ошибка при генерации случайного числа: %v", err)
+		return 0
+	}
+
+	return getRand.Int64()
+}
+
 func readSensorData(dataChan chan<- int64, wg *sync.WaitGroup) {
 	defer wg.Done()
 	defer close(dataChan)
 
-	getRand, err := rand.Int(rand.Reader, big.NewInt(1000))
-	if err != nil {
-		fmt.Printf("Ошибка при генерации случайного числа: %v", err)
-		return
-	}
-
 	startTime := time.Now()
 	for time.Since(startTime) < time.Minute {
-		number := getRand.Int64()
-		dataChan <- number
+		dataChan <- randomNumber(1000)
 		time.Sleep(70 * time.Millisecond)
 	}
 }
