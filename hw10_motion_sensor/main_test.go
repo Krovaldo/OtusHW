@@ -1,17 +1,14 @@
 package main
 
 import (
-	"sync"
 	"testing"
 	"time"
 )
 
 func TestReadSensor(t *testing.T) {
 	dataChan := make(chan int64)
-	var wg sync.WaitGroup
 
-	wg.Add(1)
-	go readSensorData(dataChan, &wg)
+	go readSensorData(dataChan)
 
 	count := 0
 	timeout := time.After(10 * time.Second)
@@ -38,17 +35,13 @@ func TestReadSensor(t *testing.T) {
 func TestProcessData(t *testing.T) {
 	dataChan := make(chan int64, 10)
 	processedDataChan := make(chan float64, 1)
-	var wg sync.WaitGroup
 
 	for i := 0; i < 10; i++ {
 		dataChan <- int64(i)
 	}
 	close(dataChan)
 
-	wg.Add(1)
-	go processData(dataChan, processedDataChan, &wg)
-
-	wg.Wait()
+	go processData(dataChan, processedDataChan)
 
 	avg := <-processedDataChan
 	expectedAvg := 4.5

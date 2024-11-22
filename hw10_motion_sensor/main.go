@@ -4,7 +4,6 @@ import (
 	"crypto/rand"
 	"fmt"
 	"math/big"
-	"sync"
 	"time"
 )
 
@@ -18,19 +17,24 @@ func randomNumber(maxNum int) int64 {
 	return getRand.Int64()
 }
 
-func readSensorData(dataChan chan<- int64, wg *sync.WaitGroup) {
-	defer wg.Done()
+func readSensorData(dataChan chan<- int64) {
 	defer close(dataChan)
 
-	startTime := time.Now()
-	for time.Since(startTime) < time.Minute {
-		dataChan <- randomNumber(1000)
-		time.Sleep(70 * time.Millisecond)
+	timer := time.NewTimer(time.Minute)
+	defer timer.Stop()
+
+	for {
+		select {
+		case <-timer.C:
+			return
+		default:
+			dataChan <- randomNumber(1000)
+			time.Sleep(70 * time.Millisecond)
+		}
 	}
 }
 
-func processData(dataChan <-chan int64, calculatedData chan<- float64, wg *sync.WaitGroup) {
-	defer wg.Done()
+func processData(dataChan <-chan int64, calculatedData chan<- float64) {
 	defer close(calculatedData)
 
 	count := 0
@@ -64,13 +68,9 @@ func main() {
 	dataChan := make(chan int64)
 	calculatedData := make(chan float64)
 
-	var wg sync.WaitGroup
+	go readSensorData(dataChan)
 
-	wg.Add(1)
-	go readSensorData(dataChan, &wg)
-
-	wg.Add(1)
-	go processData(dataChan, calculatedData, &wg)
+	go processData(dataChan, calculatedData)
 
 	printCalculatedDate(calculatedData) // главная горутина main
 }
