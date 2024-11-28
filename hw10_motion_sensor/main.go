@@ -27,8 +27,7 @@ func readSensorData(dataChan chan<- int64) {
 		select {
 		case <-timer.C:
 			return
-		default:
-			dataChan <- randomNumber(1000)
+		case dataChan <- randomNumber(1000):
 			time.Sleep(70 * time.Millisecond)
 		}
 	}
