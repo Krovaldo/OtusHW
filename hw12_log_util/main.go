@@ -6,9 +6,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/joho/godotenv"
-
 	"github.com/Krovaldo/OtusHW/hw12_log_util/analyzer"
+	"github.com/joho/godotenv"
 )
 
 func main() {
