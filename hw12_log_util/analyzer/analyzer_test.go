@@ -1,10 +1,11 @@
 package analyzer
 
 import (
-	"github.com/stretchr/testify/assert"
 	"os"
 	"testing"
 	"time"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestAnalyzeLogs(t *testing.T) {
@@ -29,14 +30,15 @@ func TestAnalyzeLogs(t *testing.T) {
 	}
 	defer os.Remove(tmpFile.Name())
 
-	if _, err := tmpFile.WriteString(logContent); err != nil {
+	if _, err = tmpFile.WriteString(logContent); err != nil {
 		t.Fatalf("Failed to write logs to tmp file: %v", err)
 	}
 	defer tmpFile.Close()
 
 	// Test 1
 	t.Run("Total logs count", func(t *testing.T) {
-		stats, err := AnalyzeLogs(tmpFile.Name(), "")
+		var stats *LogStats
+		stats, err = AnalyzeLogs(tmpFile.Name(), "")
 		if err != nil {
 			t.Fatalf("Failed to analyze test logs: %v", err)
 		}
@@ -46,7 +48,8 @@ func TestAnalyzeLogs(t *testing.T) {
 
 	// Test 2
 	t.Run("Logs by level", func(t *testing.T) {
-		stats, err := AnalyzeLogs(tmpFile.Name(), "")
+		var stats *LogStats
+		stats, err = AnalyzeLogs(tmpFile.Name(), "")
 		if err != nil {
 			t.Fatalf("Failed to analyze test logs: %v", err)
 		}
@@ -65,7 +68,8 @@ func TestAnalyzeLogs(t *testing.T) {
 
 	// Test 3
 	t.Run("Filter by log level", func(t *testing.T) {
-		stats, err := AnalyzeLogs(tmpFile.Name(), "ERROR")
+		var stats *LogStats
+		stats, err = AnalyzeLogs(tmpFile.Name(), "ERROR")
 		if err != nil {
 			t.Fatalf("AnalyzeLogs failed: %v", err)
 		}
@@ -75,20 +79,21 @@ func TestAnalyzeLogs(t *testing.T) {
 
 	// Test 4
 	t.Run("Earliest and latest log", func(t *testing.T) {
-		stats, err := AnalyzeLogs(tmpFile.Name(), "")
+		var stats *LogStats
+		stats, err = AnalyzeLogs(tmpFile.Name(), "")
 		if err != nil {
 			t.Fatalf("Failed to analyze test logs: %v", err)
 		}
 
-		expectedEarliestLog := time.Date(2023, 10, 01, 8, 0, 0, 0, time.UTC)
-		expectedLatestLog := time.Date(2023, 10, 01, 8, 1, 0, 0, time.UTC)
+		expectedEarliestLog := time.Date(2023, 10, 1, 8, 0, 0, 0, time.UTC)
+		expectedLatestLog := time.Date(2023, 10, 1, 8, 1, 0, 0, time.UTC)
 		assert.Equal(t, expectedEarliestLog, stats.EarliestLog)
 		assert.Equal(t, expectedLatestLog, stats.LatestLog)
 	})
 
 	// Test 5
 	t.Run("Error handling", func(t *testing.T) {
-		_, err := AnalyzeLogs("notExists", "")
+		_, err = AnalyzeLogs("notExists", "")
 		expectedError := "failed to open log file: open notExists: no such file or directory"
 		assert.EqualError(t, err, expectedError)
 	})

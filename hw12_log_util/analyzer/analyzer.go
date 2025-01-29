@@ -40,7 +40,8 @@ func AnalyzeLogs(filepath, logLevel string) (*LogStats, error) {
 			continue
 		}
 		timeStampStr := strings.TrimPrefix(parts[0], "[")
-		timestamp, err := time.Parse(timeFormat, timeStampStr)
+		var timestamp time.Time
+		timestamp, err = time.Parse(timeFormat, timeStampStr)
 		if err != nil {
 			continue
 		}
@@ -74,7 +75,7 @@ func AnalyzeLogs(filepath, logLevel string) (*LogStats, error) {
 		}
 	}
 
-	if err := scanner.Err(); err != nil {
+	if err = scanner.Err(); err != nil {
 		return nil, fmt.Errorf("error reading log file: %w", err)
 	}
 
