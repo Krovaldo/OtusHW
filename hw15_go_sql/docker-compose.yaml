@@ -1,0 +1,12 @@
+services:
+    pg-storage:
+        image: postgres:latest
+        container_name: pg-storage
+        environment:
+            POSTGRES_USER: ${APP_DB_USER}
+            POSTGRES_PASSWORD: ${APP_DB_PASSWORD}
+            POSTGRES_DB: ${APP_DB_DATABASE}
+        volumes:
+            - ./localdata/pg-storage:/var/lib/postgresql/data
+        ports:
+            - ${APP_DB_PORT}:5432
