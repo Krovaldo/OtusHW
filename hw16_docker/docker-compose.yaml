@@ -1,0 +1,29 @@
+services:
+    pg-storage:
+        image: postgres:latest
+        container_name: pg-storage
+        environment:
+            POSTGRES_USER: ${APP_DB_USER}
+            POSTGRES_PASSWORD: ${APP_DB_PASSWORD}
+            POSTGRES_DB: ${APP_DB_DATABASE}
+        volumes:
+            - pg-data:/var/lib/postgresql/data
+        ports:
+            - "${APP_DB_PORT}:5432"
+
+    app:
+        build: .
+        container_name: app
+        depends_on:
+            - pg-storage
+        environment:
+            DB_HOST: pg-storage
+            DB_PORT: 5432
+            DB_USER: ${APP_DB_USER}
+            DB_PASSWORD: ${APP_DB_PASSWORD}
+            DB_NAME: ${APP_DB_DATABASE}
+        ports:
+            - "8080:8080"
+
+volumes:
+    pg-data:
